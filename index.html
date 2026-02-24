@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PetAdopt — Pet Adoption</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="#">PetAdopt</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navMain" class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="#" data-nav="home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-nav="register">Register Pet</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-nav="adopt">Adopt</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-nav="about">About</a></li>
+          </ul>
+          <div class="d-flex">
+            <button id="btn-show-login" class="btn btn-light me-2">Login</button>
+            <button id="btn-show-register-user" class="btn btn-outline-light">Create Account</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container my-4">
+      <!-- HOME -->
+      <section id="home" class="view">
+        <div class="jumbotron p-4 rounded bg-light">
+          <h1 class="display-6">Find your next companion</h1>
+          <p class="lead">Browse pets available for adoption or register a found pet to help it get a new home.</p>
+          <div>
+            <a href="#" class="btn btn-primary me-2" data-nav="adopt">Browse Pets</a>
+            <a href="#" class="btn btn-outline-primary" data-nav="register">Register a Pet</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- REGISTER PET -->
+      <section id="register" class="view" style="display:none;">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Register a Found Pet</h3>
+            <form id="pet-register-form" enctype="multipart/form-data">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Name</label>
+                  <input name="name" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Species</label>
+                  <input name="species" class="form-control" placeholder="Dog / Cat / Other" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Breed</label>
+                  <input name="breed" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Color</label>
+                  <input name="color" class="form-control">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Age (years)</label>
+                  <input name="age" type="number" min="0" class="form-control">
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="aggressive" id="aggrCheck" value="1">
+                    <label class="form-check-label" for="aggrCheck">Aggressive</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Image</label>
+                  <input class="form-control" type="file" name="image" accept="image/*">
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Description</label>
+                  <textarea name="description" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="col-12">
+                  <button class="btn btn-success" id="btn-register-pet" type="submit">Register Pet</button>
+                  <div id="pet-register-msg" class="mt-2"></div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ADOPT / BROWSE -->
+      <section id="adopt" class="view" style="display:none;">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3>Available Pets for Adoption</h3>
+          <div>
+            <input id="search-pet" class="form-control" placeholder="Search by name, species, color..." style="width:300px;">
+          </div>
+        </div>
+
+        <div id="pet-grid" class="row gy-3"></div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="view" style="display:none;">
+        <div class="card">
+          <div class="card-body">
+            <h3>About PetAdopt</h3>
+            <p>This sample app helps citizens register found pets and lets potential adopters browse available animals.</p>
+
+            <div class="accordion" id="aboutAcc">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="accOneHeader">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accOne">How to register a pet</button>
+                </h2>
+                <div id="accOne" class="accordion-collapse collapse show" data-bs-parent="#aboutAcc">
+                  <div class="accordion-body">Fill the Register form, attach an image, and click Register. The pet becomes visible on the Adopt page.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accTwo">Adoption process</button>
+                </h2>
+                <div id="accTwo" class="accordion-collapse collapse" data-bs-parent="#aboutAcc">
+                  <div class="accordion-body">Click Adopt on a pet card to request an adoption; the system stores a request for admin review.</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Pet details modal -->
+    <div class="modal fade" id="petModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="petModalTitle" class="modal-title">Pet</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-5">
+                <img id="petModalImg" src="" class="img-fluid rounded">
+              </div>
+              <div class="col-md-7">
+                <ul class="list-group">
+                  <li class="list-group-item"><strong>Name:</strong> <span id="m-name"></span></li>
+                  <li class="list-group-item"><strong>Species / Breed:</strong> <span id="m-species"></span></li>
+                  <li class="list-group-item"><strong>Color:</strong> <span id="m-color"></span></li>
+                  <li class="list-group-item"><strong>Age:</strong> <span id="m-age"></span></li>
+                  <li class="list-group-item"><strong>Aggressive:</strong> <span id="m-agg"></span></li>
+                  <li class="list-group-item"><strong>Description:</strong><div id="m-desc" class="mt-2"></div></li>
+                </ul>
+                <div class="mt-3">
+                  <button id="modal-adopt-btn" class="btn btn-primary">Adopt</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Create Account</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+            <input id="su-username" class="form-control mb-2" placeholder="Username">
+            <input id="su-email" class="form-control mb-2" placeholder="Email">
+            <input id="su-password" class="form-control mb-2" type="password" placeholder="Password">
+
+            <label class="mt-2 fw-bold">Security Question</label>
+            <select id="su-question" class="form-control mb-2">
+              <option>What is your favorite pet name?</option>
+              <option>What is your birthplace?</option>
+              <option>What is your first school?</option>
+            </select>
+
+            <input id="su-answer" class="form-control" placeholder="Your Answer">
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-success" id="btn-signup-submit">Create Account</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Login</h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+            <input id="lg-username" class="form-control mb-2" placeholder="Username or Email">
+            <input id="lg-password" class="form-control" type="password" placeholder="Password">
+
+            <p class="mt-3 text-end">
+              <a href="#" id="open-reset">Forgot Password?</a>
+            </p>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="btn-login-submit">Login</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div class="modal fade" id="resetModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header bg-warning">
+            <h5 class="modal-title">Reset Password</h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+
+            <!-- Step 1 -->
+            <div id="reset-step1">
+              <input id="rp-ue" class="form-control mb-2" placeholder="Username or Email">
+              <button class="btn btn-warning w-100" id="rp-btn-continue">Continue</button>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="reset-step2" style="display:none;">
+              <p id="rp-question" class="fw-bold"></p>
+              <input id="rp-answer" class="form-control mb-3" placeholder="Your Answer">
+              <button class="btn btn-warning w-100" id="rp-btn-verify">Verify</button>
+            </div>
+
+            <!-- Step 3 -->
+            <div id="reset-step3" style="display:none;">
+              <input id="rp-newpass" class="form-control mb-3" type="password" placeholder="New Password">
+              <button class="btn btn-success w-100" id="rp-btn-update">Update Password</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- App JS -->
+    <script src="app.js"></script>
+  </body>
+</html>

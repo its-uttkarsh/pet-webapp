@@ -1,0 +1,8 @@
+/* styles.css - small UI tweaks */
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f9fc; color:#222; }
+header, .jumbotron { margin-bottom: 1rem; }
+.card { border-radius: 10px; }
+.pet-img { width:100%; height:200px; object-fit:cover; border-radius:8px; }
+#pet-grid .card { transition: transform .12s ease; }
+#pet-grid .card:hover { transform: translateY(-4px); }
+.navbar-brand { font-weight:700; letter-spacing: .3px; }
